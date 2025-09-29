@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MiPortal.com HN Clone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<style>
+@keyframes swing {
+  15% { transform: rotate(15deg); }
+  30% { transform: rotate(-10deg); }
+  45% { transform: rotate(5deg); }
+  60% { transform: rotate(-5deg); }
+  75% { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+.animate-swing {
+  animation: swing 1s ease;
+  transform-origin: top center;
+}
+.text-shadow-md {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+@keyframes fade-in-down-fast {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-down-fast {
+    animation: fade-in-down-fast 0.2s ease-out;
+}
+@keyframes fade-in-fast {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-fast {
+  animation: fade-in-fast 0.3s ease-out forwards;
+}
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-slide-in-up {
+  animation: slide-in-up 0.5s ease-out backwards;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+.dashboard-background-pattern,
+.profile-tabs-background {
+    background-color: #f8fafc; /* bg-slate-50 */
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 8v3H5v1h3v3h1v-3h3V8h-3V5H8v3z' fill='%23e2e8f0'/%3E%3C/svg%3E");
+}
+.home-background-pattern {
+    background-color: #bfdbfe; /* blue-200 */
+}
+.footer-background {
+    background-color: #00284D; /* A deep, formal blue */
+}
+.hero-background-image {
+    position: relative;
+    background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+}
+.hero-background-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, rgba(0, 61, 122, 0.85), rgba(0, 91, 187, 0.7));
+    z-index: 1;
+}
+@keyframes pulse-gentle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+.animate-pulse-gentle {
+  animation: pulse-gentle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes fade-out-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+.animate-fade-out-down {
+  animation: fade-out-down 0.5s ease-out forwards;
+}
+@keyframes progress-bar-fill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+.animate-progress-bar {
+  animation: progress-bar-fill 15s linear forwards;
+}
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 86, 179, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 86, 179, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 86, 179, 0);
+  }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 5s infinite;
+}
+@keyframes pulse-glow-orange {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 130, 32, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(245, 130, 32, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 130, 32, 0);
+  }
+}
+.animate-pulse-glow-orange {
+  animation: pulse-glow-orange 5s infinite;
+}
+@keyframes blink-cursor {
+  from, to { border-color: transparent; }
+  50% { border-color: #f58220; }
+}
+.typing-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  border-right: 2px solid #f58220;
+  animation: blink-cursor 0.75s step-end infinite;
+}
+.mouse-cursor {
+  position: absolute;
+  z-index: 9999;
+  pointer-events: none;
+  transition: top 0.6s ease-in-out, left 0.6s ease-in-out;
+}
+@keyframes click-effect {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.8); }
+  100% { transform: scale(1); }
+}
+.mouse-cursor.clicking {
+  animation: click-effect 0.2s ease-in-out;
+}
+@keyframes fade-in-letter {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+.animate-letter-fade-in span {
+    display: inline-block;
+    opacity: 0;
+    animation: fade-in-letter 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+@keyframes draw-underline {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 100px;
+        opacity: 1;
+    }
+}
+.animate-draw-underline {
+    animation: draw-underline 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: 0.9s; /* Start after letter animation */
+}
+@keyframes search-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+.animate-search-pulse {
+  animation: search-pulse 3s infinite ease-in-out;
+}
+@keyframes search-rotate {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(-15deg) scale(1.1); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+.animate-search-rotate {
+  animation: search-rotate 6s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+@keyframes briefcase-fade-in {
+  0% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.8; transform: scale(1); }
+}
+.animate-briefcase-fade-in {
+  animation: briefcase-fade-in 6s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+.menu-shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-shine-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(110deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 60%);
+  transform: translateX(-100%);
+  animation: shimmer 5s infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.menu-shine-effect-slow {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-shine-effect-slow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(110deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 60%);
+  transform: translateX(-100%);
+  animation: shimmer 9s infinite;
+  pointer-events: none;
+}
+.menu-shine-effect-very-slow {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-shine-effect-very-slow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(110deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 60%);
+  transform: translateX(-100%);
+  animation: shimmer 15s infinite;
+  pointer-events: none;
+}
+.menu-shine-effect-10s {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-shine-effect-10s::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(110deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 65%);
+  transform: translateX(-100%);
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+.cta-background-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+@keyframes scroll-infinite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.animate-scroll-infinite {
+    animation: scroll-infinite 40s linear infinite;
+}
+</style>
+<link rel="stylesheet" href="/index.css">
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "@supabase/supabase-js": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "@google/genai": "https://esm.sh/@google/genai",
+    "jspdf": "https://esm.sh/jspdf@2.5.1",
+    "jspdf-autotable": "https://esm.sh/jspdf-autotable@3.8.2",
+    "recharts": "https://esm.sh/recharts@2.12.7?deps=react@18.2.0,react-dom@18.2.0",
+    "mammoth": "https://esm.sh/mammoth@1.7.2",
+    "pdfjs-dist": "https://esm.sh/pdfjs-dist@4.4.168/build/pdf.mjs",
+    "docx": "https://esm.sh/docx@8.5.0"
+  }
+}
+</script>
+  <script type="module" crossorigin src="https://jalstoolsforex2025.io/empleos/assets/index-CgJkLf95.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
